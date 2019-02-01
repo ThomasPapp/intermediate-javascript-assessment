@@ -44,7 +44,14 @@ function noWeakLink() {
     url: '/api/users'
   })
   // CODE HERE...
-
+  .then(res => {
+    firstUser = res.data[0];
+    return res;
+  })
+  .then(res => {
+    thirdUser = res.data[2];
+    return res.data[9];
+  })
 }
 
 
@@ -74,7 +81,7 @@ function large() {
   return 'My name is ' + this.name + ' and I am very heavy!'
 }
 // CODE HERE...
-
+const boundToElephant = large.bind(elephant);
 
 
 // *************
@@ -89,7 +96,9 @@ function large() {
 
 // CODE HERE...
 
-
+function deathStar(capacity, crew) {
+  return capacity.bind(crew);
+}
 
 // *************
 // * PROBLEM 4 *
@@ -104,6 +113,7 @@ function large() {
 
 // CODE HERE...
 
+const accountingOffice = assets => liabilities => assets + liabilities;
 
 
 // *************
@@ -129,7 +139,16 @@ function large() {
 
 // CODE HERE...
 
-
+function forgetter(name) {
+  const remember = [];
+  return function rememberall(item) {
+    remember.push(item);
+    return {
+      name,
+      remember
+    }
+  }
+}
 
 // *************
 // * PROBLEM 6 *
@@ -156,3 +175,28 @@ function large() {
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
 // CODE HERE...
+
+function frodo(startingHungerValue, startingDangerValue) {
+  let hunger = startingHungerValue;
+  let danger = startingDangerValue;
+
+  return {
+    dinnerOverFire: () => {
+      hunger = Math.max(hunger - 25, 0);
+      danger = Math.min(danger + 40, 100);
+      return {
+        hunger,
+        danger
+      }
+    },
+
+    hidingInBush: () => {
+      hunger = Math.min(hunger + 35, 100);
+      danger = Math.max(danger - 20, 0);
+      return {
+        hunger,
+        danger
+      }
+    }
+  }
+}

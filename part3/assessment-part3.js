@@ -14,6 +14,11 @@
 
 // CODE HERE...
 
+function callBinding(magicAnimals, updateAnimal, id) {
+    const animal = magicAnimals.find(animal => animal.id === id);
+    updateAnimal.call(animal);
+    return updateAnimal('Trogdor');
+}
 
 
 // *************
@@ -29,7 +34,10 @@
 
 // CODE HERE...
 
-
+function applyBinding(magicAnimals, updateAnimal, id) {
+    const animal = magicAnimals.find(animal => animal.id === id);
+    return updateAnimal.apply(animal, ['being majestic', 'eating rainbows']);
+}
 
 // *************
 // * PROBLEM 3 *
@@ -48,7 +56,6 @@
 var foo;
 
 // CODE HERE...
-
 
 
 // *************
